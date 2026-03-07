@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent {label 'slave2'}
     environment {
            DOCKER_USER= 'Keerthana'
            AWS_ACCESS_KEY = '12890dh'
@@ -15,7 +15,7 @@ pipeline {
                 
                 sh '''
                     env
-                    
+
                 '''
             }
 

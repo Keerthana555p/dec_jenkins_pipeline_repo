@@ -15,10 +15,6 @@ pipeline {
         stage("C") {
             steps {
                 echo "Stage E is running"
-                sh '''
-                #!/bin/bash
-                sleep5
-                '''
                 
             }
         }

@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'save1'}
     stages {
         stage("A") {
             steps {
@@ -7,14 +7,19 @@ pipeline {
                 echo "This is a linux command"
             }
         }
-        stage("D") {
+        stage("B") {
             steps {
                 echo "Stage D is running"
             }
         }
-        stage("E") {
+        stage("C") {
             steps {
                 echo "Stage E is running"
+                sh '''
+                #!/bin/bash
+                sleep5
+                '''
+                
             }
         }
     }

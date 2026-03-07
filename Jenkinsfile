@@ -1,28 +1,23 @@
 pipeline {
-    agent {label '!slave2'}
+  
+    agent none
+    
+     parameters {
+        string(name: 'NAME',default: '', description: 'Please tell me your name?')
+        booleanparaemeter(name: 'SKIP_TEST',description: 'to skip test and deploy')
+        choice[name: 'BRANCH',choices: 'master', 'stagging','prod', 'four']
+
     stages {
         stage("A") {
+            agent {label 'slave1'}
             
-
             steps {
-                sh 'sleep 5'
-                echo "This is a linux command"
+                echo "NAME:${params.Name}"
+                echo "SKIP-TEST: ${params.'SKIP_TEST'}"
+                echo "BRANCH TO DEPLOY: ${params.BRANCH}"
             }
         }
-        stage("B") {
-
-            
-
-            steps {
-                echo "Stage D is running"
-            }
-        }
-
-        stage("C") {
-            steps {
-                echo "Stage E is running"
-                
+        
             }
         }
     }
-}

@@ -1,8 +1,8 @@
 pipeline {
-    agent none
+    agent {label 'slave1 && slave2'}
     stages {
         stage("A") {
-            agent {label 'slave1'}
+            
 
             steps {
                 sh 'sleep 5'
@@ -11,13 +11,13 @@ pipeline {
         }
         stage("B") {
 
-            agent {label 'slave2'}
+            
 
             steps {
                 echo "Stage D is running"
             }
         }
-        
+
         stage("C") {
             steps {
                 echo "Stage E is running"

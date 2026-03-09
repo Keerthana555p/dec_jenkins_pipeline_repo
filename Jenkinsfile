@@ -27,7 +27,7 @@ pipeline {
                             
                     
                        
-                    catch |ere}
+                    catch}
                          echo "This is the error"
                     }
                 }

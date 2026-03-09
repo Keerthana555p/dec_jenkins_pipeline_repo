@@ -1,36 +1,21 @@
 pipeline {
     agent any
 
-    // stages {
-        // stage("A") {
-        //     steps {
-
-        //         catchError(buildResult: "SUCCESS", stageResult: 'FAILURE')
-
-        //               echo "This is stage1 at windows"
-        //                sh '''
-        //                sleep 5
-        //                exit 1
-        //                 '''
-        //     }
-        // }
-
+    stages {
         stage("Stage1_a") {
-                    steps {
-                        script {
-                            try {
-                                sh '''
-                                   sleep 5
-                                   exit1
-                                   '''
-
-                            
-                    
-                            } 
-                    catch(err) {
-                         echo "This is the error"
+            steps {
+                script {
+                    try {
+                        sh '''
+                            sleep 5
+                            exit 1
+                        '''
+                    } catch (err) {
+                        echo "This is the error: ${err}"
                     }
                 }
+            }
+        }
 
         stage("Parallel testing") {
             parallel {
@@ -57,4 +42,3 @@ pipeline {
         }
     }
 }
-    }

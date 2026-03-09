@@ -1,11 +1,21 @@
 pipeline {
     agent any
 
+    parameters {
+          booleanParam(name: 'SKIP_TEST', defaultValue: false, description: 'Skip test and deploy')
+    }
+
+    environment {
+        CURRENT_ENV = 'prod'
+    }
+
     stages {
-        stage("Stage1_a") {
+        stage("when branch is main") {
+            when {
+                branch 'main'
+            }
             steps {
-                script {
-                    try {
+                 {
                         sh '''
                             sleep 5
                             exit 1
@@ -17,24 +27,24 @@ pipeline {
             }
         }
 
-        stage("Parallel testing") {
-            parallel {
-                stage("Windows") {
-                    steps {
-                        echo "This is stage1 at windows"
-                        sh 'sleep 10'
-                    }
-                }
-                stage("Linux") {
-                    steps {
-                        echo "This is stage2 at linux"
-                        sh 'sleep 5'
-                    }
-                }
-            }
-        }
+      
 
-        stage("Final Stage") {
+        stage("when enviornment ") {
+            when { 
+                environment name: 'CURRENT_ENV', value: 'prod'
+            }
+            steps {
+                echo "This is last stage"
+                sh 'sleep 5'
+            }
+
+        stage("when parameter") {
+            when { 
+                allof {
+                 branch 'main'
+                 expression {params.SKIP_TEST= true}
+            }
+            
             steps {
                 echo "This is last stage"
                 sh 'sleep 5'

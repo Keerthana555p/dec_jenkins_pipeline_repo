@@ -18,7 +18,7 @@ pipeline {
         stage("Stage1_a") {
                     steps {
                         script {
-                            try (
+                            try {
                                 sh '''
                                    sleep 5
                                    exit1
@@ -27,7 +27,7 @@ pipeline {
                             
                     
                        
-                    catch |err)
+                    catch |ere}
                          echo "This is the error"
                     }
                 }

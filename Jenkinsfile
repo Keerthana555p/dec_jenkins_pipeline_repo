@@ -26,8 +26,8 @@ pipeline {
 
                             
                     
-                       
-                    catch}
+                            } 
+                    catch(err) {
                          echo "This is the error"
                     }
                 }

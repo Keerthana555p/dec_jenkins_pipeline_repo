@@ -1,36 +1,35 @@
 pipeline {
-    agent any 
+    agent any
 
     stages {
-
         stage("A") {
-           
             steps {
-                echo "This is satge1 at windows"
+                echo "This is stage1 at windows"
             }
         }
-    stages {
-        parallel
+
         stage("Parallel testing") {
-            steps {
-                echo "This is satge1 at windows"
-                sh 'sleep 10'
+            parallel {
+                stage("Windows") {
+                    steps {
+                        echo "This is stage1 at windows"
+                        sh 'sleep 10'
+                    }
+                }
+                stage("Linux") {
+                    steps {
+                        echo "This is stage2 at linux"
+                        sh 'sleep 5'
+                    }
+                }
             }
         }
-        }
-    stages {
-        stage("Parallel testing") {
-            steps {
-                echo "This is satge2 at linux"
-                sh 'sleep 5'
-            }
-        }
-    }
-    stages {
+
         stage("Final Stage") {
             steps {
                 echo "This is last stage"
                 sh 'sleep 5'
+            }
         }
     }
 }

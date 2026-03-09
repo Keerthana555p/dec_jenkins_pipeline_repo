@@ -4,7 +4,12 @@ pipeline {
     stages {
         stage("A") {
             steps {
+                catchError(buildResult: "SUCCESS", stageResult: 'FAILURE')
                 echo "This is stage1 at windows"
+                sh '''
+                  sleep 5
+                  exit 1
+                  '''
             }
         }
 

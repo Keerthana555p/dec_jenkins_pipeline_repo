@@ -1,24 +1,36 @@
 pipeline {
-    agent {label 'slave2'}
-    environment {
-           DOCKER_USER= 'Keerthana'
-           AWS_ACCESS_KEY = '12890dh'
-       
-    }
+    agent any 
 
     stages {
+
         stage("A") {
            
             steps {
-                echo "DOCKER_USER: ${DOCKER_USER}"
-                echo "AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}"
-                
-                sh '''
-                    env
-
-                '''
+                echo "This is satge1 at windows"
             }
-
+        }
+    stages {
+        parallel
+        stage("Parallel testing") {
+            steps {
+                echo "This is satge1 at windows"
+                sh 'sleep 10'
+            }
+        }
+        }
+    stages {
+        stage("Parallel testing") {
+            steps {
+                echo "This is satge2 at linux"
+                sh 'sleep 5'
+            }
+        }
+    }
+    stages {
+        stage("Final Stage") {
+            steps {
+                echo "This is last stage"
+                sh 'sleep 5'
         }
     }
 }

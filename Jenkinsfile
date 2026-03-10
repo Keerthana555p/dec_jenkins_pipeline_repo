@@ -5,20 +5,20 @@ pipeline {
         pollSCM('H/5 * * * *')
     }
 
-    parameters {
-        booleanParam(name: 'SKIP_TEST', defaultValue: false, description: 'Skip test stage')
-    }
+    // parameters {
+    //     booleanParam(name: 'SKIP_TEST', defaultValue: false, description: 'Skip test stage')
+    // }
 
-    environment {
-        CURRENT_ENV = 'prod'
-    }
+    // environment {
+    //     CURRENT_ENV = 'prod'
+    // }
 
-    stage("when parameter") {
-        when {
-            allOf {
-                branch 'main'
-                expression { params.SKIP_TEST == true }
-            }
+    // stage("when parameter") {
+    //     when {
+    //         allOf {
+    //             branch 'main'
+    //             expression { params.SKIP_TEST == true }
+    //         }
         }
         steps {
             echo "This is parameter stage"

@@ -24,5 +24,4 @@ pipeline {
             echo "This is parameter stage"
             sh 'sleep 5'
         }
-    }
-}
+    
